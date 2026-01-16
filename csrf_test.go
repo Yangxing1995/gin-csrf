@@ -1,15 +1,15 @@
 package csrf
 
 import (
-	"github.com/gin-contrib/sessions/cookie"
+	"github.com/trustasia-com/sessions/cookie"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/trustasia-com/sessions"
 )
 
 func init() {

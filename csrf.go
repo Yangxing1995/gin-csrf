@@ -7,8 +7,8 @@ import (
 	"io"
 
 	"github.com/dchest/uniuri"
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/trustasia-com/sessions"
 )
 
 const (

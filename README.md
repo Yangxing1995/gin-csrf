@@ -1,6 +1,6 @@
 # gin-csrf [![Build Status](https://travis-ci.org/utrack/gin-csrf.svg?branch=master)](https://travis-ci.org/utrack/gin-csrf)
 
-CSRF protection middleware for [Gin]. This middleware has to be used with [gin-contrib/sessions](https://github.com/gin-contrib/sessions).
+CSRF protection middleware for [Gin]. This middleware has to be used with [gin-contrib/sessions](https://github.com/trustasia-com/sessions).
 
 Original credit to [tommy351](https://github.com/tommy351/gin-csrf), this fork makes it work with gin-gonic contrib sessions.
 
@@ -16,8 +16,8 @@ $ go get github.com/utrack/gin-csrf
 package main
 
 import (
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
+	"github.com/trustasia-com/sessions"
+	"github.com/trustasia-com/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/utrack/gin-csrf"
 )
