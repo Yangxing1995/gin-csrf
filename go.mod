@@ -1,6 +1,6 @@
 module github.com/Yangxing1995/gin-csrf
 
-go 1.24.11
+go 1.23
 
 require (
 	github.com/dchest/uniuri v0.0.0-20160212164326-8902c56451e9
