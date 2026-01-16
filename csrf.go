@@ -41,10 +41,11 @@ var defaultTokenGetter = func(c *gin.Context) string {
 
 // Options stores configurations for a CSRF middleware.
 type Options struct {
-	Secret        string
-	IgnoreMethods []string
-	ErrorFunc     gin.HandlerFunc
-	TokenGetter   func(c *gin.Context) string
+	Secret         string
+	IgnorePrefixes []string
+	IgnoreMethods  []string
+	ErrorFunc      gin.HandlerFunc
+	TokenGetter    func(c *gin.Context) string
 }
 
 func tokenize(secret, salt string) string {
@@ -66,6 +67,23 @@ func inArray(arr []string, value string) bool {
 	}
 
 	return inarr
+}
+
+// SkipperFunc 定义中间件跳过函数
+type SkipperFunc func(*gin.Context) bool
+
+// skipPathPrefix 检查请求路径是否包含指定的前缀，如果包含则跳过
+func skipPathPrefix(c *gin.Context, prefixes []string) bool {
+
+	path := c.Request.URL.Path
+	pathLen := len(path)
+
+	for _, p := range prefixes {
+		if pl := len(p); pathLen >= pl && path[:pl] == p {
+			return true
+		}
+	}
+	return false
 }
 
 // Middleware validates CSRF token.
@@ -91,6 +109,11 @@ func Middleware(options Options) gin.HandlerFunc {
 		c.Set(csrfSecret, options.Secret)
 
 		if inArray(ignoreMethods, c.Request.Method) {
+			c.Next()
+			return
+		}
+
+		if skipPathPrefix(c, options.IgnorePrefixes) {
 			c.Next()
 			return
 		}
